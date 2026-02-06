@@ -2,7 +2,7 @@ import { Link as ReactLink } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import Background from '../../assets/background-1.png';
+import Background from '../../assets/background.svg';
 import BackgroundLogin from '../../assets/bg1.png';
 
 export const Container = styled.div`
@@ -23,7 +23,7 @@ export const LeftContainer = styled.div`
   justify-content: center;
 
   img {
-    width: 80%;
+    width: 65%;
   }
 `;
 export const RightContainer = styled.div`
@@ -35,7 +35,6 @@ export const RightContainer = styled.div`
   height: 100%;
   width: 100%;
   max-width: 50%;
-
   background: url('${Background}');
   background-color: #1e1f1f;
 
