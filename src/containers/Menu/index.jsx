@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { CardProduct } from '../../components/CardProduct';
 import { api } from '../../services/api';
@@ -15,6 +16,20 @@ import {
 export function Menu() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+
+  const Navigate = useNavigate();
+
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+
+  const [activeCategory, setActiveCategory] = useState(() => {
+    const categoryId = +queryParams.get('categoria');
+
+    if (categoryId) {
+      return categoryId;
+    }
+    return 0;
+  });
 
   useEffect(() => {
     async function loadCategories() {
@@ -38,6 +53,14 @@ export function Menu() {
     loadCategories();
     loadProducts();
   }, []);
+
+  const filteredProducts =
+    activeCategory === 0
+      ? products
+      : products.filter(
+          (product) => Number(product.category_id) === activeCategory,
+        );
+
   return (
     <Container>
       <Banner>
@@ -54,12 +77,29 @@ export function Menu() {
 
       <CategoryMenu>
         {categories.map((category) => (
-          <CategoryButton key={category.id}> {category.name} </CategoryButton>
+          <CategoryButton
+            key={category.id}
+            $isActiveCategory={category.id === activeCategory}
+            onClick={() => {
+              Navigate(
+                {
+                  pathname: '/cardapio',
+                  search: `?categoria=${category.id}`,
+                },
+                {
+                  replace: true,
+                },
+              );
+              setActiveCategory(Number(category.id));
+            }}
+          >
+            {category.name}
+          </CategoryButton>
         ))}
       </CategoryMenu>
 
       <ProductsContainer>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <CardProduct product={product} key={product.id} />
         ))}
       </ProductsContainer>
