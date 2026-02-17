@@ -47,7 +47,13 @@ export function OffersCarousel() {
 
   return (
     <Container>
-      <Title> Ofertas Do Dia! </Title>
+      <Title>
+        <div className="led-track">
+          <span>Ofertas Do Dia!</span>
+          <span aria-hidden="true">Ofertas Do Dia!</span>
+          <span aria-hidden="true">Ofertas Do Dia!</span>
+        </div>
+      </Title>
 
       <Carousel
         responsive={resposive}

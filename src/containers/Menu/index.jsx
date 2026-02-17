@@ -10,6 +10,8 @@ import {
   CategoryButton,
   CategoryMenu,
   Container,
+  Home,
+  HomeOffers,
   ProductsContainer,
 } from './styles';
 
@@ -75,6 +77,14 @@ export function Menu() {
         </h1>
       </Banner>
 
+      <HomeOffers
+        onClick={() => {
+          Navigate('/');
+        }}
+      >
+        <span>CLIQUE AQUI PARA VER AS OFERTAS DO DIA!</span>
+      </HomeOffers>
+
       <CategoryMenu>
         {categories.map((category) => (
           <CategoryButton
@@ -103,6 +113,13 @@ export function Menu() {
           <CardProduct product={product} key={product.id} />
         ))}
       </ProductsContainer>
+      <Home
+        onClick={() => {
+          Navigate('/');
+        }}
+      >
+        Voltar para o Inicio!
+      </Home>
     </Container>
   );
 }

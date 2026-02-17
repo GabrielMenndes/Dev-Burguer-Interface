@@ -8,6 +8,7 @@ import * as yup from 'yup';
 
 import BackGroundLogin from '../../assets/Logo-1.svg';
 import { Button } from '../../components/Button';
+import { useUser } from '../../hooks/UserContext.jsx';
 import { api } from '../../services/api.js';
 import {
   Container,
@@ -20,6 +21,8 @@ import {
 
 export function Login() {
   const navigate = useNavigate();
+  const { putUserData } = useUser();
+
   const schema = yup
     .object({
       email: yup
@@ -42,9 +45,7 @@ export function Login() {
   });
 
   const onSubmit = async (data) => {
-    const {
-      data: { token },
-    } = await toast.promise(
+    const { data: userData } = await toast.promise(
       api.post('/sessions', {
         email: data.email,
         password: data.password,
@@ -54,7 +55,11 @@ export function Login() {
         success: {
           render() {
             setTimeout(() => {
-              navigate('/');
+              if (userData?.admin) {
+                navigate('/admin/pedidos');
+              } else {
+                navigate('/');
+              }
             }, 2000);
             return 'Login realizado com sucesso! 👌';
           },
@@ -62,7 +67,7 @@ export function Login() {
         error: 'Email ou Senha Incorretos! 🤯',
       },
     );
-    localStorage.setItem('token', token);
+    putUserData(userData);
   };
 
   return (

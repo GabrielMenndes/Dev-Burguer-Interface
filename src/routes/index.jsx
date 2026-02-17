@@ -1,26 +1,41 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import { Home } from '../containers/Home';
-import { Login } from '../containers/Login';
-import { Menu } from '../containers/Menu';
-import { Register } from '../containers/Register';
+import {
+  Cart,
+  Checkout,
+  CompletePayment,
+  Home,
+  Login,
+  Menu,
+  Orders,
+  Products,
+  Register,
+} from '../containers';
+import { EditProduct } from '../containers/Admin/EditProduct';
+import { NewProduct } from '../containers/Admin/NewProduct';
+import { AdminLayout } from '../layouts/AdminLayout';
+import { UserLayout } from '../layouts/UserLayout';
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/cadastro',
-    element: <Register />,
-  },
+export function Router() {
+  return (
+    <Routes>
+      <Route path="/" element={<UserLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/cardapio" element={<Menu />} />
+        <Route path="/carrinho" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/complete" element={<CompletePayment />} />
+      </Route>
 
-  {
-    path: '/cardapio',
-    element: <Menu />,
-  },
-]);
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin/pedidos" element={<Orders />} />
+        <Route path="/admin/novo-produto" element={<NewProduct />} />
+        <Route path="/admin/editar-produto" element={<EditProduct />} />
+        <Route path="/admin/produtos" element={<Products />} />
+      </Route>
+
+      <Route path="/login" element={<Login />} />
+      <Route path="/cadastro" element={<Register />} />
+    </Routes>
+  );
+}
