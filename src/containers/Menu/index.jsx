@@ -26,12 +26,13 @@ export function Menu() {
 
   const [activeCategory, setActiveCategory] = useState(() => {
     const categoryId = +queryParams.get('categoria');
-
-    if (categoryId) {
-      return categoryId;
-    }
-    return 0;
+    return categoryId || 0;
   });
+
+  useEffect(() => {
+    const categoryId = +queryParams.get('categoria');
+    setActiveCategory(categoryId || 0);
+  }, [search]);
 
   useEffect(() => {
     async function loadCategories() {
@@ -77,11 +78,7 @@ export function Menu() {
         </h1>
       </Banner>
 
-      <HomeOffers
-        onClick={() => {
-          Navigate('/');
-        }}
-      >
+      <HomeOffers to="/">
         <span>CLIQUE AQUI PARA VER AS OFERTAS DO DIA!</span>
       </HomeOffers>
 

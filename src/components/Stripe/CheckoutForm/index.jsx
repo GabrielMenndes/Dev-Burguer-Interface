@@ -10,12 +10,15 @@ import {
 } from '@stripe/react-stripe-js';
 
 import { useCart } from '../../../hooks/CartContext';
+import { useUser } from '../../../hooks/UserContext';
+import { api } from '../../../services/api';
 
 // import { useCart } from '../../../hooks';
 // import { api } from '../../../services/api';
 
 export default function CheckoutForm() {
-  const { clearCart } = useCart();
+  const { cartProducts, clearCart } = useCart();
+  const { userInfo } = useUser();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -58,7 +61,22 @@ export default function CheckoutForm() {
     }
 
     if (paymentIntent && paymentIntent.status === 'succeeded') {
-      // Pagamento já confirmado, só redireciona
+      // Pagamento confirmado, agora cria o pedido no backend
+      try {
+        await api.post('/orders', {
+          products: cartProducts.map((item) => ({
+            id: item.id,
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+          user: userInfo?._id || userInfo?.id,
+          paymentIntentId: paymentIntent.id,
+        });
+      } catch (err) {
+        toast.error('Erro ao salvar pedido no banco.');
+        // Continua fluxo para não travar usuário
+      }
       setTimeout(() => {
         clearCart();
         navigate(

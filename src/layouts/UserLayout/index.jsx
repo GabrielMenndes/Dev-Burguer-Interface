@@ -6,7 +6,9 @@ export function UserLayout() {
   return (
     <>
       <Header />
-      <Outlet />
+      <div style={{ paddingTop: 72 }}>
+        <Outlet />
+      </div>
       <Footer />
     </>
   );

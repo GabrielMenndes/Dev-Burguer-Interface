@@ -13,6 +13,12 @@ const globalStyles = createGlobalStyle`
         font-style: normal;
     }
 
+    html, body {
+        overflow-x: hidden;
+        width: 100vw;
+        max-width: 100vw;
+    }
+
     button {
         cursor: pointer;
     }

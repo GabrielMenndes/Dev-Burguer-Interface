@@ -24,20 +24,20 @@ export const Title = styled.h2`
   height: 56px;
   padding: 0 20px;
   border-radius: 32px;
-  background-color: #0b0b0b;
-  border: 2px solid #202020;
+  background-color: #18171a;
+  border: 2px solid #9758a6;
   box-shadow:
-    0 0 14px rgba(58, 255, 20, 0.2),
-    inset 0 0 10px rgba(58, 255, 20, 0.18);
+    0 0 14px rgba(151, 88, 166, 0.18),
+    inset 0 0 10px rgba(151, 88, 166, 0.12);
   overflow: hidden;
 
   background-image:
     radial-gradient(
       circle at 1px 1px,
-      rgba(255, 255, 255, 0.18) 1px,
+      rgba(255, 255, 255, 0.1) 1px,
       transparent 1.6px
     ),
-    linear-gradient(90deg, rgba(57, 255, 20, 0.16), rgba(0, 0, 0, 0));
+    linear-gradient(90deg, rgba(151, 88, 166, 0.1), rgba(0, 0, 0, 0));
   background-size:
     6px 6px,
     100% 100%;
@@ -56,11 +56,11 @@ export const Title = styled.h2`
     font-family: 'Road Rage', sans-serif;
     font-size: 30px;
     letter-spacing: 1.5px;
-    color: #39ff14;
+    color: #fff;
     text-shadow:
-      0 0 8px rgba(57, 255, 20, 0.85),
-      0 0 16px rgba(57, 255, 20, 0.65),
-      0 0 22px rgba(57, 255, 20, 0.45);
+      0 0 8px #9758a6,
+      0 0 16px #9758a6,
+      0 0 22px #18171a;
     animation: ledPulseMini 14s ease-in-out infinite;
   }
 
