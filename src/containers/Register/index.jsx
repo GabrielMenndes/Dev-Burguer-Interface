@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -14,6 +13,7 @@ import {
   Form,
   InputContainer,
   LeftContainer,
+  LinkDeLogin,
   RightContainer,
   Title,
 } from './styles.js';
@@ -106,7 +106,8 @@ export function Register() {
           <Button type="submit">Cria Conta</Button>
         </Form>
         <p>
-          Ja possui uma conta? <Link to="/login">Clique Aqui!</Link>
+          Ja possui uma conta?
+          <LinkDeLogin to="/login">Clique Aqui!</LinkDeLogin>
         </p>
       </RightContainer>
     </Container>

@@ -90,7 +90,10 @@ export const InputContainer = styled.div`
     height: 10px;
   }
 `;
-export const Link = styled(ReactLink)`
+export const LinkDeLogin = styled(ReactLink)`
   text-decoration: none;
   color: #9758a6;
+  margin-left: 8px;
+  font-weight: 600;
+  font-size: 20px;
 `;

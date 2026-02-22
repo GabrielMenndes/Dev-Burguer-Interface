@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -17,6 +16,7 @@ import {
   LeftContainer,
   RightContainer,
   Title,
+  LinkCadastro,
 } from './styles';
 
 export function Login() {
@@ -96,7 +96,8 @@ export function Login() {
           <Button type="submit">Entrar</Button>
         </Form>
         <p>
-          Não possui conta? <Link to="/cadastro">Clique Aqui!</Link>
+          Não possui conta?
+          <LinkCadastro to="/cadastro">Clique Aqui!</LinkCadastro>
         </p>
       </RightContainer>
     </Container>
